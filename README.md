@@ -7,3 +7,7 @@ Ketika melakukan run satu server `cargo run --bin server` dan tiga client `cargo
 ### 2.2: Modifying port
 ![alt text](images/beda_port.png)
 Jika web socket client diubah dari port 2000 ke 8080, client tidak akan lagi terhubung dengan server karena server masih menggunakan port 2000. Ketika server dijalankan ia akan mendengarkan port 2000 dan ketika client dijalankan ia akan memunculkan error karena server tidak terdapat port 8080 yang sedang berjalan. Jika ingin menggunakan port 8080, maka server juga harus diubah agar mendengarkan di port yang sama, yaitu 8080. Dengan begitu, client dan server bisa saling terhubung dengan benar.
+
+### 2.3: Small changes, add IP and Port
+![alt text](images/ip_port.png)
+Terdapat perubahan code pada server.rs yaitu dengan menambahkan ip dan port pengirim dalam setiap broadcast dengan mengubah `bcast_tx.send(text.into())?;` menjadi `bcast_tx.send(format!("{addr}:{text}"))?;`. Perubahan ini akan mengirimkan ip dan port kepada semua client sehingga client dapat mengetahui pengirim dari pesan tersebut.
