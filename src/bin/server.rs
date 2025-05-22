@@ -15,7 +15,7 @@ async fn handle_connection(
     ws_stream
         .send(Message::text("Welcome to chat! Type a message".to_string()))
         .await?;
-    
+
     let mut bcast_rx = bcast_tx.subscribe();
 
     // A continuous loop for concurrently performing two tasks: (1) receiving
@@ -47,8 +47,8 @@ async fn handle_connection(
 async fn main() -> Result<(), Box<dyn Error + Send + Sync>> {
     let (bcast_tx, _) = channel(16);
 
-    let listener = TcpListener::bind("127.0.0.1:2000").await?;
-    println!("listening on port 2000");
+    let listener = TcpListener::bind("127.0.0.1:8081").await?;
+    println!("listening on port 8080");
 
     loop {
         let (socket, addr) = listener.accept().await?;
